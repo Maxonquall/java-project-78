@@ -103,6 +103,7 @@ public class ApplicationTest {
         var actual3 = schema.isValid(15);
         var actual4 = schema.isValid(29);
         var actual5 = schema.isValid(30);
+        schema.isValid(4);
         assertFalse(actual1);
         assertTrue(actual2);
         assertTrue(actual3);
