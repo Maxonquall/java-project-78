@@ -1,7 +1,7 @@
 package hexlet.code.schemas;
 
 public class NumberSchema extends BaseSchema<Integer> {
-    private /*static*/ boolean numberIsPositive = false;
+    private boolean numberIsPositive = false;
     private int minNumber = -2147483648;
     private int maxNumber = 2147483647;
 
@@ -20,13 +20,13 @@ public class NumberSchema extends BaseSchema<Integer> {
     }
 
     public NumberSchema positive() {
-        this.numberIsPositive = true;
+        numberIsPositive = true;
         return this;
     }
 
     public NumberSchema range(int min, int max) {
-        this.minNumber = min;
-        this.maxNumber = max;
+        minNumber = min;
+        maxNumber = max;
         return this;
     }
 }

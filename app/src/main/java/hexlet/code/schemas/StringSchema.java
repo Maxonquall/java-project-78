@@ -2,7 +2,7 @@ package hexlet.code.schemas;
 
 public class StringSchema extends BaseSchema<String> {
 
-    private /*static*/ int minLengthOfString = -1;
+    private int minLengthOfString = -1;
     private String subString = "";
 
     public boolean isValid(String string) {
@@ -20,12 +20,12 @@ public class StringSchema extends BaseSchema<String> {
     }
 
     public StringSchema minLength(int minLength) {
-        this.minLengthOfString = minLength;
+        minLengthOfString = minLength;
         return this;
     }
 
     public StringSchema contains(String stringExample) {
-        this.subString = stringExample;
+        subString = stringExample;
         return this;
     }
 }

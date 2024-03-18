@@ -3,6 +3,8 @@ package hexlet.code;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -23,7 +25,6 @@ public class ApplicationTest {
         assertFalse(actual1);
         assertFalse(actual2);
     }
-
     @Test
     void minLengthStringTest() {
         var v = new Validator();
@@ -35,7 +36,6 @@ public class ApplicationTest {
         assertTrue(actual2);
         assertTrue(actual3);
     }
-
     @Test
     void containsStringTest() {
         var v = new Validator();
@@ -49,7 +49,6 @@ public class ApplicationTest {
         assertTrue(actual3);
         assertFalse(actual4);
     }
-
     @Test
     void methodChainingStringTest() {
         var v = new Validator();
@@ -63,7 +62,6 @@ public class ApplicationTest {
         assertFalse(actual3);
         assertTrue(actual4);
     }
-
     @Test
     void requiredNumberTest() {
         var v = new Validator();
@@ -74,7 +72,6 @@ public class ApplicationTest {
         actual1 = schema.isValid(null);
         assertFalse(actual1);
     }
-
     @Test
     void positiveNumberTest() {
         var v = new Validator();
@@ -93,7 +90,6 @@ public class ApplicationTest {
         assertFalse(actual2);
         assertTrue(actual3);
     }
-
     @Test
     void rangeNumberTest() {
         var v = new Validator();
@@ -110,7 +106,6 @@ public class ApplicationTest {
         assertTrue(actual4);
         assertFalse(actual5);
     }
-
     @Test
     void methodChainingNumberTest() {
         var v = new Validator();
@@ -123,5 +118,40 @@ public class ApplicationTest {
         assertFalse(actual2);
         assertFalse(actual3);
         assertTrue(actual4);
+    }
+    @Test
+    void requiredMapTest() {
+        var v = new Validator();
+        var schema = v.map();
+        var actual1 = schema.isValid(null);
+        assertTrue(actual1);
+        schema.required();
+        actual1 = schema.isValid(null);
+        assertFalse(actual1);
+    }
+    @Test
+    void sizeOfMethodMapTest() {
+        var v = new Validator();
+        var schema = v.map();
+        var actual1 = schema.isValid(Map.of("key1", "value1"));
+        var actual2 = schema.isValid(Map.of("key1", "value1", "key2", "value2"));
+        assertTrue(actual1);
+        assertTrue(actual2);
+        schema.sizeof(2);
+        actual1 = schema.isValid(Map.of("key1", "value1"));
+        actual2 = schema.isValid(Map.of("key1", "value1", "key2", "value2"));
+        assertFalse(actual1);
+        assertTrue(actual2);
+    }
+    @Test
+    void methodChainingMapTest() {
+        var v = new Validator();
+        var schema = v.map().required().sizeof(1);
+        var actual1 = schema.isValid(null);
+        var actual2 = schema.isValid(Map.of("key1", "value1", "key2", "value2"));
+        var actual3 = schema.isValid(Map.of("key1", "value1"));
+        assertFalse(actual1);
+        assertFalse(actual2);
+        assertTrue(actual3);
     }
 }
