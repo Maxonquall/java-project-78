@@ -1,8 +1,10 @@
 package hexlet.code;
 
 
+import hexlet.code.schemas.BaseSchema;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -154,4 +156,93 @@ public class ApplicationTest {
         assertFalse(actual2);
         assertTrue(actual3);
     }
+
+    @Test
+    void nestedMapStringTest() {
+        var v = new Validator();
+        var schema = v.map();
+        var schemas = new HashMap<String, BaseSchema<String>>();
+        schemas.put("String1", v.string().required().contains("Valid"));
+        schemas.put("String2", v.string());
+        schema.shape(schemas);
+
+        var map1 = new HashMap<String, String>();
+        map1.put("String1", "Validation");
+        map1.put("String2", null);
+        var actual1 = schema.isValid(map1);
+
+        var map2 = new HashMap<String, String>();
+        map2.put("String1", "validation");
+        map2.put("String2", null);
+        var actual2 = schema.isValid(map2);
+
+        var map3 = new HashMap<String, String>();
+        map3.put("String1", null);
+        map3.put("String2", "Valid");
+        var actual3 = schema.isValid(map3);
+
+        assertTrue(actual1);
+        assertFalse(actual2);
+        assertFalse(actual3);
+
+    }
+
+    @Test
+    void nestedMapNumberTest() {
+        var v = new Validator();
+        var schema = v.map();
+        var schemas = new HashMap<String, BaseSchema<Integer>>();
+        schemas.put("Number1", v.number().required().positive().range(1, 100));
+        schemas.put("Number2", v.number().positive());
+        schema.shape(schemas);
+
+        var map1 = new HashMap<String, Integer>();
+        map1.put("Number1", 2);
+        map1.put("Number2", null);
+        var actual1 = schema.isValid(map1);
+
+        var map2 = new HashMap<String, Integer>();
+        map2.put("Number1", null);
+        map2.put("Number2", 2);
+        var actual2 = schema.isValid(map2);
+
+        var map3 = new HashMap<String, Integer>();
+        map3.put("Number1", -2);
+        map3.put("Number2", 665);
+        var actual3 = schema.isValid(map3);
+
+        assertTrue(actual1);
+        assertFalse(actual2);
+        assertFalse(actual3);
+    }
+
+    @Test
+    void nestedMapMapTest() {
+        var v = new Validator();
+        var schema = v.map();
+        var schemas = new HashMap<String, BaseSchema<Map>>();
+        schemas.put("Map1", v.map().required().sizeof(2));
+        schemas.put("Map2", v.map().sizeof(2));
+        schema.shape(schemas);
+
+        var map1 = new HashMap<String, Map<String, String>>();
+        map1.put("Map1", Map.of("key1", "value1", "key2", "value2"));
+        map1.put("Map2", null);
+        var actual1 = schema.isValid(map1);
+
+        var map2 = new HashMap<String, Map<String, String>>();
+        map2.put("Map1", null);
+        map2.put("Map2", Map.of("key1", "value1", "key2", "value2"));
+        var actual2 = schema.isValid(map2);
+
+        var map3 = new HashMap<String, Map<String, String>>();
+        map3.put("Map1", Map.of("key1", "value1"));
+        map3.put("Map2", Map.of("key1", "value1", "key2", "value2"));
+        var actual3 = schema.isValid(map3);
+
+        assertTrue(actual1);
+        assertFalse(actual2);
+        assertFalse(actual3);
+    }
+
 }

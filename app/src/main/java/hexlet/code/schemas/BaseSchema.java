@@ -5,10 +5,6 @@ public abstract class BaseSchema<T> {
 
     public abstract boolean isValid(T value);
 
-  /*  public BaseSchema required() {
-        requiredCalled = true;
-        return this;
-    }*/
 
 }
 

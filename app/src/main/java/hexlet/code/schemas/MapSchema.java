@@ -1,11 +1,18 @@
 package hexlet.code.schemas;
 
+import hexlet.code.Validator;
+
+import java.util.HashMap;
 import java.util.Map;
+
 
 public class MapSchema extends BaseSchema<Map> {
 
     private boolean sizeOfMethodCalled = false;
     private int mapSize = 2147483647;
+    private Map<String, BaseSchema> nestedMap = new HashMap<>();
+    private boolean shapeNotCalled = true;
+
 
     public boolean isValid(Map map) {
         if (map == null) {
@@ -23,5 +30,13 @@ public class MapSchema extends BaseSchema<Map> {
         mapSize = size;
         return this;
     }
+
+    public MapSchema shape(Map<String, Validator> schemas) {
+        shapeNotCalled = false;
+
+
+        return this;
+    }
+
 
 }
