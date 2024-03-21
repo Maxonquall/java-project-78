@@ -31,7 +31,7 @@ public class MapSchema extends BaseSchema<Map> {
         return this;
     }
 
-    public MapSchema shape(Map<String, Validator> schemas) {
+    public <T> MapSchema shape(Map<String, BaseSchema<T>> schemas) {
         shapeNotCalled = false;
 
 
