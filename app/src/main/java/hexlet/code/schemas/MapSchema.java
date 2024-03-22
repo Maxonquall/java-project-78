@@ -1,23 +1,29 @@
 package hexlet.code.schemas;
 
-import hexlet.code.Validator;
-
 import java.util.HashMap;
 import java.util.Map;
 
 
 public class MapSchema extends BaseSchema<Map> {
 
-    private boolean sizeOfMethodCalled = false;
     private int mapSize = 2147483647;
     private Map<String, BaseSchema> nestedMap = new HashMap<>();
-    private boolean shapeNotCalled = true;
-
 
     public boolean isValid(Map map) {
         if (map == null) {
             return !requiredCalled;
         }
+
+        if (!nestedMap.isEmpty()) {
+            for (var entry : nestedMap.entrySet()) {
+                var key = entry.getKey();
+                var value = entry.getValue();
+                if (!map.containsKey(key) || !value.isValid(map.get(key))) {
+                    return false;
+                }
+            }
+        }
+
         return (mapSize == 2147483647 || map.size() == mapSize);
     }
     public MapSchema required() {
@@ -26,17 +32,13 @@ public class MapSchema extends BaseSchema<Map> {
     }
 
     public MapSchema sizeof(int size) {
-        sizeOfMethodCalled = true;
         mapSize = size;
         return this;
     }
 
     public <T> MapSchema shape(Map<String, BaseSchema<T>> schemas) {
-        shapeNotCalled = false;
-
-
+        nestedMap.clear();
+        nestedMap.putAll(schemas);
         return this;
     }
-
-
 }
