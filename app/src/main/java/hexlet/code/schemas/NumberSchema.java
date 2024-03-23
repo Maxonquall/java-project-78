@@ -20,7 +20,7 @@ public class NumberSchema extends BaseSchema<Integer> {
     }
 
     /**
-     * Prohibits the use of null and the empty string
+     * Prohibits the use of null and the empty string.
      * @return NumberSchema object
      */
 
@@ -30,7 +30,7 @@ public class NumberSchema extends BaseSchema<Integer> {
     }
 
     /**
-     * Checks that a number must be positive
+     * Checks that a number must be positive.
      * @return NumberSchema object
      */
 
@@ -40,7 +40,7 @@ public class NumberSchema extends BaseSchema<Integer> {
     }
 
     /**
-     * Checks that a number must be in a given range
+     * Checks that a number must be in a given range.
      * @param min
      * @param max
      * @return NumberSchema object

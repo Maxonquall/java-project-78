@@ -34,7 +34,7 @@ public class MapSchema extends BaseSchema<Map> {
     }
 
     /**
-     * Prohibits the use of null and the empty string
+     * Prohibits the use of null and the empty string.
      * @return MapSchema object
      */
     public MapSchema required() {
@@ -43,7 +43,8 @@ public class MapSchema extends BaseSchema<Map> {
     }
 
     /**
-     * Limits the size of the map
+     * Limits the size of the map.
+     * @param size
      * @return MapSchema object
      */
 
@@ -53,7 +54,7 @@ public class MapSchema extends BaseSchema<Map> {
     }
 
     /**
-     * Checks the schema for validity
+     * Checks the schema for validity.
      * @param schemas
      * @return MapSchema object
      * @param <T>

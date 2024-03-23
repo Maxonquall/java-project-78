@@ -20,7 +20,7 @@ public class StringSchema extends BaseSchema<String> {
     }
 
     /**
-     * Prohibits the use of null and the empty string
+     * Prohibits the use of null and the empty string.
      * @return StringSchema object
      */
 
@@ -30,7 +30,7 @@ public class StringSchema extends BaseSchema<String> {
     }
 
     /**
-     * Limits a string by length
+     * Limits a string by length.
      * @param minLength
      * @return StringSchema object
      */
@@ -41,7 +41,7 @@ public class StringSchema extends BaseSchema<String> {
     }
 
     /**
-     * Checks for the presence of a substring in a string
+     * Checks for the presence of a substring in a string.
      * @param stringExample
      * @return StringSchema object
      */
