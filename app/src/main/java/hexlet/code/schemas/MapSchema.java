@@ -32,15 +32,32 @@ public class MapSchema extends BaseSchema<Map> {
 
         return (mapSize == 2147483647 || map.size() == mapSize);
     }
+
+    /**
+     * Prohibits the use of null and the empty string
+     * @return MapSchema object
+     */
     public MapSchema required() {
         requiredCalled = true;
         return this;
     }
 
+    /**
+     * Limits the size of the map
+     * @return MapSchema object
+     */
+
     public MapSchema sizeof(int size) {
         mapSize = size;
         return this;
     }
+
+    /**
+     * Checks the schema for validity
+     * @param schemas
+     * @return MapSchema object
+     * @param <T>
+     */
 
     public <T> MapSchema shape(Map<String, BaseSchema<T>> schemas) {
         nestedMap.clear();
