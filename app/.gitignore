@@ -16,9 +16,7 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 .idea
-../.idea
-.idea/
-../.idea/
+\\wsl$\Ubuntu\home\maxim\java-project-78\.idea
 
 
 
