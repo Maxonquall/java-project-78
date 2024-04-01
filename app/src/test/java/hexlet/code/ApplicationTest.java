@@ -220,7 +220,8 @@ public class ApplicationTest {
     void nestedMapMapTest() {
         var v = new Validator();
         var schema = v.map();
-        var schemas = new HashMap<String, BaseSchema<Map>>();
+       // var schemas = new HashMap<String, BaseSchema<Map>>();
+        var schemas = new HashMap<String, BaseSchema<Map<?, ?>>>();
         schemas.put("Map1", v.map().required().sizeof(2));
         schemas.put("Map2", v.map().sizeof(2));
         schema.shape(schemas);

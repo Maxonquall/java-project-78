@@ -4,7 +4,7 @@ package hexlet.code.schemas;
 import java.util.Map;
 
 
-public final class MapSchema extends BaseSchema {
+public final class MapSchema extends BaseSchema<Map<?, ?>> {
 
 
     public MapSchema() {
@@ -22,10 +22,16 @@ public final class MapSchema extends BaseSchema {
     }
 
     public <T> MapSchema shape(Map<String, BaseSchema<T>> schemas) {
-        addCheck("shape", value -> schemas.entrySet()
-                .stream()
-                ;
-
+        addCheck(
+                "shape",
+                map -> {
+                    return schemas.entrySet().stream().allMatch(e -> {
+                        var v =  map.get(e.getKey());
+                        var schema = e.getValue();
+                        return schema.isValid((T) v);
+                    });
+                }
+        );
 
         return this;
     }
