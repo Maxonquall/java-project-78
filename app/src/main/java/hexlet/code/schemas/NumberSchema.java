@@ -1,13 +1,12 @@
 package hexlet.code.schemas;
 
+import java.util.Objects;
+
 public final class NumberSchema extends BaseSchema<Integer> {
 
-    public NumberSchema() {
-        addCheck("data", value -> value instanceof Integer || value == null);
-    }
 
     public NumberSchema required() {
-        addCheck("required", value -> value instanceof Integer);
+        addCheck("required", Objects::nonNull);
         return this;
     }
 

@@ -2,13 +2,9 @@ package hexlet.code.schemas;
 
 public final class StringSchema extends BaseSchema<String> {
 
-    public StringSchema() {
-        addCheck("data", value -> value instanceof String || value == null);
-    }
 
     public StringSchema required() {
-        addCheck("required", value -> value instanceof String && !value.isEmpty());
-        requiredCalled = true;
+        addCheck("required", value -> value != null && !value.isEmpty());
         return this;
     }
 
